@@ -7,3 +7,5 @@ Converting Blueprint to C++ - 3-6 hours - In Progress
 Implementing UI for Level Design - 2.5-5 hours - Next
 ---------------------------------------------------------------------
 Optional Unreal Tutorials:
+
+Enhanced Input in UE5 - 1-2 hours - Complete
