@@ -14,7 +14,7 @@ class UNREALTUTORIALS_26_API UGrabber : public USceneComponent
 	
 public:	
 	// Sets default values for this component's properties
-	UGrabber();
+	UGrabber(); //Constructor
 
 protected:
 	// Called when the game starts
