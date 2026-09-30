@@ -11,6 +11,10 @@ UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class UNREALTUTORIALS_26_API UGrabber : public USceneComponent
 {
 	GENERATED_BODY()
+
+protected:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly)
+	float MaxGrabDistance = 100.0f;
 	
 public:	
 	// Sets default values for this component's properties
