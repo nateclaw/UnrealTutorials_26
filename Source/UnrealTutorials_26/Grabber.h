@@ -15,7 +15,12 @@ class UNREALTUTORIALS_26_API UGrabber : public USceneComponent
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
 	float MaxGrabDistance = 100.0f;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float HoldDistance = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float GrabRadius = 50.0f;
 public:	
 	// Sets default values for this component's properties
 	UGrabber(); //Constructor
