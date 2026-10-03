@@ -23,6 +23,11 @@ void UGrabber::BeginPlay()
 	
 }
 
+FVector UGrabber::GetMaxGrabLocation() const
+{
+	return GetComponentLocation() + (GetForwardVector() * MaxGrabDistance);
+}
+
 
 // Called every frame
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

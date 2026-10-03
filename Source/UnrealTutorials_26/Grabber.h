@@ -7,6 +7,7 @@
 #include "Grabber.generated.h"
 
 
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class UNREALTUTORIALS_26_API UGrabber : public USceneComponent
 {
@@ -28,6 +29,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable,BlueprintPure)
+	FVector GetMaxGrabLocation() const;
 
 public:	
 	// Called every frame
