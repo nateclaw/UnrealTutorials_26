@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Grabber.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
 UGrabber::UGrabber()
@@ -28,12 +29,22 @@ FVector UGrabber::GetMaxGrabLocation() const
 	return GetComponentLocation() + (GetForwardVector() * MaxGrabDistance);
 }
 
+FVector UGrabber::GetHoldLocation() const
+{
+	return GetComponentLocation() + (GetForwardVector() * HoldDistance);
+}
+
+UPhysicsHandleComponent* UGrabber::GetPhysicsComponent() const
+{
+	return GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();;
+}
+
 
 // Called every frame
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOG(LogTemp, Warning, TEXT("Grabber TickComponent"));
+	//UE_LOG(LogTemp, Warning, TEXT("Grabber TickComponent"));
 }
 

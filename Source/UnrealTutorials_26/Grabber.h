@@ -6,7 +6,7 @@
 #include "Components/SceneComponent.h"
 #include "Grabber.generated.h"
 
-
+class UPhysicsHandleComponent;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class UNREALTUTORIALS_26_API UGrabber : public USceneComponent
@@ -22,6 +22,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float GrabRadius = 50.0f;
+
 public:	
 	// Sets default values for this component's properties
 	UGrabber(); //Constructor
@@ -32,6 +33,12 @@ protected:
 
 	UFUNCTION(BlueprintCallable,BlueprintPure)
 	FVector GetMaxGrabLocation() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FVector GetHoldLocation() const;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UPhysicsHandleComponent* GetPhysicsComponent() const;
 
 public:	
 	// Called every frame
