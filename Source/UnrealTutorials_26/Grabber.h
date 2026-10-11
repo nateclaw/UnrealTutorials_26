@@ -7,6 +7,7 @@
 #include "Grabber.generated.h"
 
 class UPhysicsHandleComponent;
+class UPrimitiveComponent;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class UNREALTUTORIALS_26_API UGrabber : public USceneComponent
@@ -40,8 +41,11 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UPhysicsHandleComponent* GetPhysicsComponent() const;
 
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void NotifyQuestActor(AActor* Actor);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool TraceForPhysicsBodies(AActor*& HitActor, UPrimitiveComponent*& HitComponent);
 
 public:	
 	// Called every frame
