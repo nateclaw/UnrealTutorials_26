@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "QuestInfo.h"
 #include "QuestManager.generated.h"
+
+
+
 
 UCLASS()
 class UNREALTUTORIALS_26_API AQuestManager : public AActor
@@ -22,5 +26,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FQuestInfo> QuestList;
 
 };
