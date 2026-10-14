@@ -23,10 +23,16 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintPure, BlueprintCallable, BlueprintImplementableEvent)
+	int32 GetQuestIndex(FName QuestId);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+
+	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+	void CompleteQuest(FName QuestID, bool CompleteWholeQuest);
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FQuestInfo> QuestList;
