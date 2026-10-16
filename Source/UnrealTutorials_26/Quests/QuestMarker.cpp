@@ -3,6 +3,8 @@
 
 #include "Quests/QuestMarker.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "QuestInfo.h"
+#include "QuestManager.h"
 
 // Sets default values
 AQuestMarker::AQuestMarker()
@@ -19,5 +21,10 @@ AQuestMarker::AQuestMarker()
 	ParticleSystem->SetupAttachment(Root);
 }
 
-
+void AQuestMarker::RefreshVisibility()
+{
+	FQuestInfo Quest = GetQuestManager()->GetQuest(QuestName);
+	bool Visibility = GetQuestManager()->IsActiveQuest(QuestName) && Quest.Progress == ShowAtProgress;
+	ParticleSystem->SetVisibility(Visibility);
+}
 
