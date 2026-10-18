@@ -4,7 +4,7 @@
 #include "FirstPersonCharacter.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Grabber.h"
+//#include "Grabber.h"
 
 
 // Sets default values
@@ -43,7 +43,7 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Grab);
-	PlayerInputComponent->BindAction(TEXT("Release"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Release);
+	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Released, this, &AFirstPersonCharacter::Release);
 	//Enhanced Input
 	/*if (UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
