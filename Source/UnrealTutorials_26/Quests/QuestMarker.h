@@ -24,7 +24,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RefreshVisibility();
 
+private:
+	UFUNCTION() //UFUNCTION needed for Dynamic
+	void QuestUpdate(int32 Index);
+
 protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	USceneComponent* Root;
 

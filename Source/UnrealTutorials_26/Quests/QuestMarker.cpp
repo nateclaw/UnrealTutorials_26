@@ -4,7 +4,7 @@
 #include "Quests/QuestMarker.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "QuestInfo.h"
-#include "QuestManager.h"
+//#include "QuestManager.h"
 
 // Sets default values
 AQuestMarker::AQuestMarker()
@@ -21,10 +21,25 @@ AQuestMarker::AQuestMarker()
 	ParticleSystem->SetupAttachment(Root);
 }
 
+void AQuestMarker::BeginPlay()
+{
+	GetQuestManager()->CompletedQuest.AddDynamic(this, &AQuestMarker::QuestUpdate); //subscribing to the event
+	//UE_LOG(LogTemp, Warning, TEXT("QuestMarker Dynamic Event (QuestUpdate) Subscribed"));
+	RefreshVisibility();
+}
+
 void AQuestMarker::RefreshVisibility()
 {
 	FQuestInfo Quest = GetQuestManager()->GetQuest(QuestName);
 	bool Visibility = GetQuestManager()->IsActiveQuest(QuestName) && Quest.Progress == ShowAtProgress;
 	ParticleSystem->SetVisibility(Visibility);
 }
+
+void AQuestMarker::QuestUpdate(int32 Index)
+{
+	RefreshVisibility();
+	//UE_LOG(LogTemp, Warning, TEXT("QuestMarker Updated"));
+}
+
+
 
