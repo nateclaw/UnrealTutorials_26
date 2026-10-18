@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-//#include "QuestManager.h"
+#include "QuestManager.h"
 #include "QuestMarker.generated.h"
 
 
 class UParticleSystemComponent;
-class AQuestManager;
+//class AQuestManager;
 
 UCLASS()
 class UNREALTUTORIALS_26_API AQuestMarker : public AActor

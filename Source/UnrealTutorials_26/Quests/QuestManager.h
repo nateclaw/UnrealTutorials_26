@@ -8,7 +8,7 @@
 #include "QuestManager.generated.h"
 
 
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCompletedQuestSignature, int32, Index);
 
 UCLASS()
 class UNREALTUTORIALS_26_API AQuestManager : public AActor
@@ -27,6 +27,11 @@ protected:
 	int32 GetQuestIndex(FName QuestId) const;
 
 public:	
+	//PUBLIC PROPERTIES//
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, VisibleAnywhere)
+	FCompletedQuestSignature CompletedQuest;
+
+	//PUBLIC FUNCTIONS//
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
