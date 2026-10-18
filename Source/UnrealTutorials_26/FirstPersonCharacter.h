@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Grabber.h"
 #include "FirstPersonCharacter.generated.h"
+
+
+//class UGrabber;
 
 UCLASS()
 class UNREALTUTORIALS_26_API AFirstPersonCharacter : public ACharacter
@@ -19,6 +23,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintPure)
+	UGrabber* GetGrabber() const;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -28,9 +35,10 @@ public:
 
 private:
 	void IA_Move(float AxisValueX,float AxisValueY);
+	void IA_Jump();
 
 	void Forward(float AxisValue);
-
-	void Jump();
-
+	void Right(float AxisValue);
+	void Grab();
+	void Release();
 };

@@ -3,6 +3,9 @@
 
 #include "FirstPersonCharacter.h"
 #include "Components/InputComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Grabber.h"
+
 
 // Sets default values
 AFirstPersonCharacter::AFirstPersonCharacter()
@@ -31,8 +34,24 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	//UE_LOG(LogTemp, Warning, TEXT("INPUT BOUND IN FirstPersonCharacter.cpp"));
+
+	//DEPRECATED INPUT MAPPING
 	PlayerInputComponent->BindAxis(TEXT("Forward"), this, &AFirstPersonCharacter::Forward);
-	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Jump);
+	PlayerInputComponent->BindAxis(TEXT("Right"), this, &AFirstPersonCharacter::Right);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
+
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Grab);
+	PlayerInputComponent->BindAction(TEXT("Release"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Release);
+	//Enhanced Input
+	/*if (UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent)
+	}*/
+	// You can bind to any of the trigger events here by changing the "ETriggerEvent" enum value
+	//Input->BindAction()
+	
 }
 
 void AFirstPersonCharacter::IA_Move(float AxisValueX, float AxisValueY)
@@ -40,13 +59,29 @@ void AFirstPersonCharacter::IA_Move(float AxisValueX, float AxisValueY)
 
 }
 
+void AFirstPersonCharacter::IA_Jump()
+{
+}
+
 void AFirstPersonCharacter::Forward(float AxisValue)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Forward %f"), AxisValue);
+	
+	GetCharacterMovement()->AddInputVector(GetActorForwardVector() * AxisValue);
 }
 
-void AFirstPersonCharacter::Jump()
+void AFirstPersonCharacter::Right(float AxisValue)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Jump"));
+	GetCharacterMovement()->AddInputVector(GetActorRightVector() * AxisValue);
+}
+
+void AFirstPersonCharacter::Grab()
+{
+	GetGrabber()->Grab();
+}
+
+void AFirstPersonCharacter::Release()
+{
+	GetGrabber()->Release();
 }
 

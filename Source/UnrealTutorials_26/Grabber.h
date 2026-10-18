@@ -28,6 +28,12 @@ public:
 	// Sets default values for this component's properties
 	UGrabber(); //Constructor
 
+	UFUNCTION(BlueprintCallable)
+	void Grab();
+
+	UFUNCTION(BlueprintCallable)
+	void Release();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
