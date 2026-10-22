@@ -2,8 +2,12 @@
 
 
 #include "FirstPersonCharacter.h"
-#include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "InputMappingContext.h"
+#include "EnhancedInputSubsystems.h"
+#include "Components/InputComponent.h"
+#include "EnhancedInputComponent.h"
+
 //#include "Grabber.h"
 
 
@@ -20,6 +24,14 @@ void AFirstPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(FPMappingContext, 0);		//Set in BP as IMC_Default
+			Subsystem->AddMappingContext(FPLookMappingContext, 0);	//Set in BP as IMC_MouseLook
+		}
+	}
 }
 
 // Called every frame
@@ -36,44 +48,56 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	//UE_LOG(LogTemp, Warning, TEXT("INPUT BOUND IN FirstPersonCharacter.cpp"));
 
 	//DEPRECATED INPUT MAPPING
-	PlayerInputComponent->BindAxis(TEXT("Forward"), this, &AFirstPersonCharacter::Forward);
-	PlayerInputComponent->BindAxis(TEXT("Right"), this, &AFirstPersonCharacter::Right);
-	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis(TEXT("Forward"), this, &AFirstPersonCharacter::Forward);
+	//PlayerInputComponent->BindAxis(TEXT("Right"), this, &AFirstPersonCharacter::Right);
+	//PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
+	//PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Grab);
 	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Released, this, &AFirstPersonCharacter::Release);
+	////////////////////////////////
+	
 	//Enhanced Input
-	/*if (UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent)
-	}*/
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFirstPersonCharacter::EIMove); 
+
+		// Jumping
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+	}
 	// You can bind to any of the trigger events here by changing the "ETriggerEvent" enum value
 	//Input->BindAction()
 	
 }
 
-void AFirstPersonCharacter::IA_Move(float AxisValueX, float AxisValueY)
-{
 
+
+void AFirstPersonCharacter::EIMove(const FInputActionValue& Value)
+{
+	const FVector2d CurrentValue = Value.Get<FVector2d>();
+	if (CurrentValue != FVector2d(0.0, 0.0)) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("IA_Move triggered"));
+	}
 }
 
-void AFirstPersonCharacter::IA_Jump()
+void AFirstPersonCharacter::EIJump()
 {
+	UE_LOG(LogTemp, Warning, TEXT("IA_Jump triggered"));
 }
 
-void AFirstPersonCharacter::Forward(float AxisValue)
-{
-	//UE_LOG(LogTemp, Warning, TEXT("Forward %f"), AxisValue);
-	
-	GetCharacterMovement()->AddInputVector(GetActorForwardVector() * AxisValue);
-}
+//void AFirstPersonCharacter::Forward(float AxisValue)
+//{
+//	//UE_LOG(LogTemp, Warning, TEXT("Forward %f"), AxisValue);
+//	
+//	GetCharacterMovement()->AddInputVector(GetActorForwardVector() * AxisValue);
+//}
 
-void AFirstPersonCharacter::Right(float AxisValue)
-{
-	GetCharacterMovement()->AddInputVector(GetActorRightVector() * AxisValue);
-}
+//void AFirstPersonCharacter::Right(float AxisValue)
+//{
+//	GetCharacterMovement()->AddInputVector(GetActorRightVector() * AxisValue);
+//}
 
 void AFirstPersonCharacter::Grab()
 {

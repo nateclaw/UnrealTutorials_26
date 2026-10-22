@@ -5,9 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Grabber.h"
-#include "FirstPersonCharacter.generated.h"
+#include "InputActionValue.h" 
+#include "FirstPersonCharacter.generated.h" // MUST BE THE LAST INCLUDE IN THE HEADER FILE
 
-
+class UInputMappingContext;
+class UInputAction;
 //class UGrabber;
 
 UCLASS()
@@ -20,11 +22,36 @@ public:
 	AFirstPersonCharacter();
 
 protected:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputMappingContext* FPMappingContext;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputMappingContext* FPLookMappingContext;
+	
+	/** Jump Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* JumpAction;
+
+	/** Move Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* MoveAction;
+
+	/** Mouse Look Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* MouseLookAction;
+
+	void EIMove(const FInputActionValue& Value);
+
+	void EIJump();
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintPure)
-	UGrabber* GetGrabber() const;
+	UGrabber* GetGrabber() const; //DONT MAKE A C++ DEFINITION
+
+	
 
 public:	
 	// Called every frame
@@ -34,11 +61,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	void IA_Move(float AxisValueX,float AxisValueY);
-	void IA_Jump();
 
-	void Forward(float AxisValue);
-	void Right(float AxisValue);
+	// DEPRECATED INPUT
+	//void Forward(float AxisValue);
+	//void Right(float AxisValue);
 	void Grab();
 	void Release();
 };
