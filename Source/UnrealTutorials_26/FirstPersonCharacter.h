@@ -41,7 +41,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputAction* MouseLookAction;
 
+	/** Grab Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* GrabAction;
+
 	void EIMove(const FInputActionValue& Value);
+
+	void EIMouseLook(const FInputActionValue& Value);
 
 	void EIJump();
 
@@ -65,6 +71,6 @@ private:
 	// DEPRECATED INPUT
 	//void Forward(float AxisValue);
 	//void Right(float AxisValue);
-	void Grab();
+	void Grab(); // Functions reused in Enhanced Input
 	void Release();
 };

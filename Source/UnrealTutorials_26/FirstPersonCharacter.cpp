@@ -53,21 +53,29 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	//PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
 	//PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
 
-	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Grab);
-	PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Released, this, &AFirstPersonCharacter::Release);
+	//PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	//PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::Grab);
+	//PlayerInputComponent->BindAction(TEXT("Grab"), EInputEvent::IE_Released, this, &AFirstPersonCharacter::Release);
 	////////////////////////////////
 	
 	//Enhanced Input
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFirstPersonCharacter::EIMove); 
 
+		// Looking
+		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &AFirstPersonCharacter::EIMouseLook);
+
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Ongoing, this, &AFirstPersonCharacter::EIJump);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+
+		// Grabbing
+		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Started, this, &AFirstPersonCharacter::Grab);
+		EnhancedInputComponent->BindAction(GrabAction, ETriggerEvent::Completed, this, &AFirstPersonCharacter::Release);
 	}
-	// You can bind to any of the trigger events here by changing the "ETriggerEvent" enum value
-	//Input->BindAction()
+	
 	
 }
 
@@ -75,16 +83,44 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 void AFirstPersonCharacter::EIMove(const FInputActionValue& Value)
 {
-	const FVector2d CurrentValue = Value.Get<FVector2d>();
-	if (CurrentValue != FVector2d(0.0, 0.0)) 
+	const FVector2d DirectionValue = Value.Get<FVector2d>();
+	if (Controller && DirectionValue != FVector2d(0.0f, 0.0f))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("IA_Move triggered"));
+		if (DirectionValue.Y != 0.0f) 
+		{
+			FVector Forward = GetActorForwardVector();
+			AddMovementInput(Forward, DirectionValue.Y);
+		}
+		if (DirectionValue.X != 0.0f)
+		{
+			FVector Right = GetActorRightVector();
+			AddMovementInput(Right, DirectionValue.X);
+		}
+		//UE_LOG(LogTemp, Warning, TEXT("IA_Move triggered"));
+	}
+}
+
+void AFirstPersonCharacter::EIMouseLook(const FInputActionValue& Value)
+{
+	const FVector2d LookValue = Value.Get<FVector2d>();
+	if (Controller && LookValue != FVector2d(0.0, 0.0))
+	{
+		if (LookValue.X != 0.0f)
+		{
+			AddControllerYawInput(LookValue.X);
+		}
+		if (LookValue.Y != 0.0f)
+		{
+			AddControllerPitchInput(LookValue.Y);
+		}
+		//UE_LOG(LogTemp, Warning, TEXT("IA_MouseLook triggered"));
 	}
 }
 
 void AFirstPersonCharacter::EIJump()
 {
-	UE_LOG(LogTemp, Warning, TEXT("IA_Jump triggered"));
+	//UE_LOG(LogTemp, Warning, TEXT("IA_Jump Ongoing"));
+	Jump();
 }
 
 //void AFirstPersonCharacter::Forward(float AxisValue)
@@ -101,11 +137,13 @@ void AFirstPersonCharacter::EIJump()
 
 void AFirstPersonCharacter::Grab()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Grab() Started"));
 	GetGrabber()->Grab();
 }
 
 void AFirstPersonCharacter::Release()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Grab() Completed"));
 	GetGrabber()->Release();
 }
 
