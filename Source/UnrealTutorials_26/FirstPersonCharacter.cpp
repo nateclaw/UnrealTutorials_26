@@ -80,7 +80,7 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 }
 
 
-
+// Moving our Character with IA_Move
 void AFirstPersonCharacter::EIMove(const FInputActionValue& Value)
 {
 	const FVector2d DirectionValue = Value.Get<FVector2d>();
@@ -100,6 +100,7 @@ void AFirstPersonCharacter::EIMove(const FInputActionValue& Value)
 	}
 }
 
+// Mouse-Based Looking with IA_MouseLook
 void AFirstPersonCharacter::EIMouseLook(const FInputActionValue& Value)
 {
 	const FVector2d LookValue = Value.Get<FVector2d>();
@@ -117,6 +118,7 @@ void AFirstPersonCharacter::EIMouseLook(const FInputActionValue& Value)
 	}
 }
 
+// Redirects to ACharacter::Jump() 
 void AFirstPersonCharacter::EIJump()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("IA_Jump Ongoing"));

@@ -45,11 +45,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputAction* GrabAction;
 
-	void EIMove(const FInputActionValue& Value);
+	void EIMove(const FInputActionValue& Value); //IA_Move
 
-	void EIMouseLook(const FInputActionValue& Value);
+	void EIMouseLook(const FInputActionValue& Value);//IA_MouseLook
 
-	void EIJump();
+	void EIJump();//IA_Jump
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
