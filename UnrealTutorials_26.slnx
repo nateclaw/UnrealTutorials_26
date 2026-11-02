@@ -33,6 +33,87 @@
       <Platform Project="x64" />
     </Project>
   </Folder>
+  <Folder Name="/Programs/">
+    <Project Path="Intermediate/ProjectFiles/DotNetPerforceLib.vcxproj" Id="df2b0268-4b3a-36ac-8a9a-f7f9ff1afc55">
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="Development Editor|Win64" Project="Development" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Development|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Shipping|Win64-arm64" Project="Win64_arm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64ec" Project="Win64_arm64ec_Shipping" />
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Programs/LiveLink/">
+    <Project Path="Intermediate/ProjectFiles/LiveLinkHub.vcxproj" Id="e05dbca3-f832-3a0e-b9a5-f2ba89d2f11f">
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame_Editor" />
+      <BuildType Solution="DebugGame|*" Project="Invalid" />
+      <BuildType Solution="Development Editor|Win64" Project="Development_Editor" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development_Editor" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development_Editor" />
+      <BuildType Solution="Development|*" Project="Invalid" />
+      <BuildType Solution="Shipping|*" Project="Invalid" />
+      <Platform Project="x64" />
+      <Build Solution="DebugGame|*" Project="false" />
+      <Build Solution="Development|*" Project="false" />
+      <Build Solution="Shipping|*" Project="false" />
+    </Project>
+  </Folder>
+  <Folder Name="/Programs/LowLevelTests/">
+    <Project Path="Intermediate/ProjectFiles/ChaosTestHarness.vcxproj" Id="2edaef1a-3784-3180-b256-00ab68e964fd">
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="Development Editor|Win64" Project="Development" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Development|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Shipping|Win64-arm64" Project="Win64_arm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64ec" Project="Win64_arm64ec_Shipping" />
+      <Platform Project="x64" />
+    </Project>
+    <Project Path="Intermediate/ProjectFiles/EventLoopUnitTests.vcxproj" Id="d6e06de1-b7d3-3352-9a0c-3c2ebaa4c9a3">
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="Development Editor|Win64" Project="Development" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Development|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Shipping|Win64-arm64" Project="Win64_arm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64ec" Project="Win64_arm64ec_Shipping" />
+      <Platform Project="x64" />
+    </Project>
+    <Project Path="Intermediate/ProjectFiles/IoStoreOnDemandTests.vcxproj" Id="272d17d6-e70e-3f34-b70c-9cfc79b44219">
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="Development Editor|Win64" Project="Development" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Development|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Shipping|Win64-arm64" Project="Win64_arm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64ec" Project="Win64_arm64ec_Shipping" />
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
   <Folder Name="/Visualizers/">
     <File Path="../../../UE_5.8/Engine/Extras/VisualStudioDebugging/Unreal.natjmc" />
     <File Path="../../../UE_5.8/Engine/Extras/VisualStudioDebugging/Unreal.natstepfilter" />
