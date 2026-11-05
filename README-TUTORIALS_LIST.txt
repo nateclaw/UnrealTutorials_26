@@ -11,4 +11,4 @@ Optional Unreal Tutorials:
 Enhanced Input in UE5 - 1-2 hours - Completed (in the Converting Blueprint to C++)
 
 Chaos Destruction - Learning Path Content
-	-Geometry Collection -9min
+	-Geometry Collection -9min - https://dev.epicgames.com/community/learning/tutorials/yrXz/unreal-engine-chaos-destruction-geometry-collections?source=bQ
